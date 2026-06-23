@@ -2,46 +2,445 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Unidad II - Portafolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerencia de Sistemas de Información - Portafolio Junior</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; color: #1e293b; padding: 2rem; }
-        .back-btn { display: inline-block; text-decoration: none; color: #1e3a8a; font-weight: bold; margin-bottom: 1.5rem; }
-        .header { background: linear-gradient(135deg, #0d9488, #14b8a6); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
-        .week-card { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        details summary { font-size: 1.2rem; font-weight: bold; cursor: pointer; color: #0f172a; }
-        .desc { margin-top: 1rem; background: #f8fafc; padding: 1rem; border-left: 4px solid #0d9488; text-align: justify; }
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0f172a;
+            --background: #f1f5f9;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --u1-color: #0284c7;
+            --u2-color: #0d9488;
+            --u3-color: #4f46e5;
+            --u4-color: #e11d48;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--background); color: var(--text); line-height: 1.6; }
+        
+        header { 
+            background: linear-gradient(135deg, var(--secondary), var(--primary)); 
+            color: white; 
+            padding: 3.5rem 2rem; 
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .header-container { max-width: 1200px; margin: 0 auto; }
+        header h1 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 800; letter-spacing: -0.03em; }
+        header h2 { font-size: 1.3rem; color: var(--primary-light); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .meta-info { 
+            display: flex; 
+            justify-content: center; 
+            gap: 1.5rem; 
+            flex-wrap: wrap; 
+            font-size: 0.9rem; 
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 1rem; 
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+        .meta-info span strong { color: #93c5fd; }
+
+        nav { background-color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 1rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+        .nav-btn { text-decoration: none; color: var(--text); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: transform 0.2s, background 0.2s, color 0.2s; }
+        
+        .nav-btn.u1 { border: 2px solid var(--u1-color); color: var(--u1-color); }
+        .nav-btn.u2 { border: 2px solid var(--u2-color); color: var(--u2-color); }
+        .nav-btn.u3 { border: 2px solid var(--u3-color); color: var(--u3-color); }
+        .nav-btn.u4 { border: 2px solid var(--u4-color); color: var(--u4-color); }
+        .nav-btn.eval { border: 2px solid #8b5cf6; color: #8b5cf6; }
+
+        .nav-btn.u1:hover { background: var(--u1-color); color: white; }
+        .nav-btn.u2:hover { background: var(--u2-color); color: white; }
+        .nav-btn.u3:hover { background: var(--u3-color); color: white; }
+        .nav-btn.u4:hover { background: var(--u4-color); color: white; }
+        .nav-btn.eval:hover { background: #8b5cf6; color: white; }
+
+        main { max-width: 1200px; margin: 3rem auto; padding: 0 1.5rem; }
+        .unit-section { margin-bottom: 4.5rem; scroll-margin-top: 90px; }
+        
+        .unit-header { padding: 1.5rem; color: white; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .unit-header h2 { font-size: 1.8rem; font-weight: 700; }
+        .unit-header p { font-size: 1rem; opacity: 0.9; margin-top: 0.4rem; font-style: italic; }
+        
+        .u1-header { background: linear-gradient(135deg, var(--u1-color), #0ea5e9); }
+        .u2-header { background: linear-gradient(135deg, var(--u2-color), #14b8a6); }
+        .u3-header { background: linear-gradient(135deg, var(--u3-color), #6366f1); }
+        .u4-header { background: linear-gradient(135deg, var(--u4-color), #fb7185); }
+
+        .weeks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .week-card { background-color: var(--card-bg); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 1.8rem; display: flex; flex-direction: column; transition: transform 0.3s; }
+        .week-card:hover { transform: translateY(-3px); }
+        
+        .week-badge { align-self: flex-start; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: white; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .u1-badge { background-color: var(--u1-color); }
+        .u2-badge { background-color: var(--u2-color); }
+        .u3-badge { background-color: var(--u3-color); }
+        .u4-badge { background-color: var(--u4-color); }
+        
+        /* Estilos Interactivos de Despliegue */
+        details { width: 100%; }
+        summary { 
+            font-size: 1.25rem; 
+            color: var(--secondary); 
+            margin-bottom: 0.5rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            list-style: none;
+            position: relative;
+            padding-right: 25px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '▼';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            transition: transform 0.2s;
+        }
+        details[open] summary::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .click-hint { font-size: 0.8rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.75rem; display: block; }
+
+        .week-desc { font-size: 0.95rem; color: var(--text); margin-top: 0.75rem; margin-bottom: 1rem; text-align: justify; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border-left: 3px solid var(--primary-light); animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .evidence-zone { margin-top: auto; padding-top: 1rem; border-top: 1px dashed #e2e8f0; }
+        .evidence-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.5rem; }
+        .btn-link { display: inline-flex; padding: 0.4rem 0.8rem; background-color: #f8fafc; border: 1px solid #cbd5e1; color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 600; border-radius: 6px; transition: all 0.2s; }
+        .btn-link:hover { background-color: #cbd5e1; color: var(--secondary); }
+
+        .eval-section { background-color: white; border-radius: 14px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .eval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .eval-card { background: #f8fafc; border-left: 4px solid #8b5cf6; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .eval-card h4 { font-size: 1rem; color: var(--secondary); margin-bottom: 0.25rem; }
+        .eval-formula { background: var(--secondary); color: #6ee7b7; text-align: center; padding: 1rem; font-family: monospace; font-size: 1.1rem; border-radius: 8px; margin-top: 1.5rem; }
+
+        footer { background-color: var(--secondary); color: white; text-align: center; padding: 2.5rem 2rem; margin-top: 6rem; font-size: 0.9rem; border-top: 4px solid var(--primary-light); }
+        footer p { opacity: 0.8; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">⬅ Volver al Menú Principal</a>
-    <div class="header">
-        <h2>Unidad II: Aplicaciones Empresariales de SI</h2>
-        <p>Capacidad: Genera la obtención de la excelencia operacional e intimidad con el cliente.</p>
-    </div>
 
-    <div class="week-card">
-        <details>
-            <summary>Semana 05: SI en los Negocios</summary>
-            <p class="desc">Modelado de bases de datos relacionales y almacenes de datos (Data Warehouses) orientados a la Inteligencia de Negocios (BI). Transición de datos hacia patrones analíticos.</p>
-        </details>
-    </div>
-    <div class="week-card">
-        <details>
-            <summary>Semana 06: Estructura Informática Integral</summary>
-            <p class="desc">Diseño arquitectónico basado en los Tres Planos (Estructura, Proceso y Sistema - EPS) para mapear flujos organizacionales alineados a los procesos.</p>
-        </details>
-    </div>
-    <div class="week-card">
-        <details>
-            <summary>Semana 07: Aplicaciones Empresariales y EAS</summary>
-            <p class="desc">Integración vertical de plataformas corporativas de gran escala: ERP, CRM y SCM, erradicando los silos de información.</p>
-        </details>
-    </div>
-    <div class="week-card">
-        <details>
-            <summary>Semana 08: Gestión para Nube Híbrida</summary>
-            <p class="desc">Estudio de estrategias de migración e interoperabilidad de software corporativo bajo topologías híbridas y distribución de cargas de trabajo.</p>
-        </details>
-    </div>
+    <header>
+        <div class="header-container">
+            <h1>Gerencia de Sistemas de Información</h1>
+            <h2>Portafolio Digital de Aprendizaje</h2>
+            <div class="meta-info">
+                <span><strong>Universidad:</strong> Universidad Peruana Los Andes</span>
+                <span><strong>Estudiante:</strong> Junior (VII Ciclo)</span>
+                <span><strong>Docente:</strong> Dr. Magno Teófilo Baldeón Tovar</span>
+                <span><strong>Código Curso:</strong> 332159</span>
+                <span><strong>Créditos:</strong> 3</span>
+                <span><strong>Duración:</strong> 06 Abr - 26 Jul 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#unidad1" class="nav-btn u1">Unidad I</a>
+            <a href="#unidad2" class="nav-btn u2">Unidad II</a>
+            <a href="#unidad3" class="nav-btn u3">Unidad III</a>
+            <a href="#unidad4" class="nav-btn u4">Unidad IV</a>
+            <a href="#evaluacion" class="nav-btn eval">Evaluación & Libros</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- UNIDAD I -->
+        <section id="unidad1" class="unit-section">
+            <div class="unit-header u1-header">
+                <h2>Unidad I: Administración en la Nube</h2>
+                <p>Capacidad: Conoce la administración y la empresa en la nube, infraestructura de TI y tecnologías emergentes.</p>
+            </div>
+            <div class="weeks-grid">
+                <div class="week-card">
+                    <span class="week-badge u1-badge">Semana 01</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>La Información en la Empresa</summary>
+                        <p class="week-desc">Se analiza el rol de la información como activo estratégico indispensable. Estudiamos cómo los Sistemas de Información (SI) transforman los datos operativos en ventajas competitivas y cómo sus componentes interactúan para soportar la toma de decisiones gerenciales en la organización contemporánea.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Tarea Sem 1</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u1-badge">Semana 02</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Computación en la Nube</summary>
+                        <p class="week-desc">Evaluación de los modelos de despliegue informático (Pública, Privada, Híbrida y Comunitaria). Se fundamenta cómo la migración hacia la nube reduce drásticamente los costos de capital (CapEx) a favor de costos operativos (OpEx), dotando a las organizaciones de elasticidad y alta disponibilidad.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Tarea Sem 2</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u1-badge">Semana 03</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Administración en la Nube</summary>
+                        <p class="week-desc">Revisión de las funciones gerenciales aplicadas al aprovisionamiento y monitoreo de servicios Cloud. Se profundiza en el control de acuerdos de niveles de servicio (SLA), la gobernanza de accesos y el aprovisionamiento automatizado mediante arquitecturas SaaS, PaaS e IaaS.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Tarea Sem 3</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u1-badge">Semana 04</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Infraestructura de TI</summary>
+                        <p class="week-desc">Análisis de la evolución técnica de las plataformas de hardware, software, redes y almacenamiento empresarial. Se evalúan las tecnologías emergentes como la virtualización, la contenedorización y su impacto directo en la escalabilidad y flexibilidad del modelo de negocio.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📝 Examen Parcial I</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UNIDAD II -->
+        <section id="unidad2" class="unit-section">
+            <div class="unit-header u2-header">
+                <h2>Unidad II: Aplicaciones Empresariales de SI</h2>
+                <p>Capacidad: Genera la obtención de la excelencia operacional e intimidad con el cliente: aplicaciones empresariales.</p>
+            </div>
+            <div class="weeks-grid">
+                <div class="week-card">
+                    <span class="week-badge u2-badge">Semana 05</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>SI en los Negocios</summary>
+                        <p class="week-desc">Modelado de bases de datos relacionales y almacenes de datos (Data Warehouses) orientados a la Inteligencia de Negocios (BI). Estudiamos la transición crítica de los datos crudos hacia patrones analíticos que optimizan las proyecciones y planes tácticos corporativos.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Evidencia</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u2-badge">Semana 06</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Estructura Informática Integral</summary>
+                        <p class="week-desc">Diseño arquitectónico de los Sistemas de Información Gerencial basado en la teoría de los Tres Planos (Estructura, Proceso y Sistema - EPS). Permite mapear flujos organizacionales y estructurar las soluciones de software alineadas estrictamente al mapa de procesos de la empresa.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Esquema EPS</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u2-badge">Semana 07</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Aplicaciones Empresariales y EAS</summary>
+                        <p class="week-desc">Evaluación e integración vertical de plataformas críticas: Enterprise Resource Planning (ERP), Customer Relationship Management (CRM) y Supply Chain Management (SCM). Se discute cómo estas arquitecturas centralizadas erradican los silos de información.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Análisis de Software</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u2-badge">Semana 08</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión para Nube Híbrida</summary>
+                        <p class="week-desc">Estudio de estrategias de migración e interoperabilidad de software corporativo bajo topologías híbridas. Se analiza la distribución inteligente de cargas de trabajo confidenciales en la nube privada y el procesamiento masivo escalable en la nube pública.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📝 Examen Parcial II</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UNIDAD III -->
+        <section id="unidad3" class="unit-section">
+            <div class="unit-header u3-header">
+                <h2>Unidad III: Infraestructura de Tecnologías de Información</h2>
+                <p>Capacidad: Identifica la infraestructura de la Tecnología de la Información para ser aplicada en la organización.</p>
+            </div>
+            <div class="weeks-grid">
+                <div class="week-card">
+                    <span class="week-badge u3-badge">Semana 09</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gobierno de TI</summary>
+                        <p class="week-desc">Aplicación de marcos normativos de Gobierno de TI (como COBIT e ITIL) para asegurar el alineamiento estratégico de la tecnología con los objetivos corporativos, mitigando riesgos operativos y maximizando el retorno de inversión en tecnologías informáticas.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Evidencia</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u3-badge">Semana 10</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión de Servicios</summary>
+                        <p class="week-desc">Modelado de la Estrategia del Servicio en base al ciclo de vida de ITIL. Se definen las capacidades y recursos técnicos requeridos para estructurar catálogos de servicios de TI de alto valor, orientados a satisfacer la demanda interna y externa de la organización.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Evidencia</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u3-badge">Semana 11</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Diseño y Transición</summary>
+                        <p class="week-desc">Análisis de la etapa de Diseño y Transición del Servicio. Se formulan las arquitecturas de red, plataformas de datos y métricas (KPIs), junto con la planificación metodológica para asegurar que el despliegue del software no interrumpa las operaciones actuales.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Subir Evidencia</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u3-badge">Semana 12</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión del Cambio</summary>
+                        <p class="week-desc">Implementación del flujo de Mesa de Servicios (Service Desk). Abordamos metodologías para el control y registro de incidentes, problemas y requerimientos, enfocándonos en la gestión del conocimiento técnico para reducir tiempos de parada operativa en fallos informáticos.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📝 Examen Parcial III</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UNIDAD IV -->
+        <section id="unidad4" class="unit-section">
+            <div class="unit-header u4-header">
+                <h2>Unidad IV: Desarrollo de Sistemas de Información</h2>
+                <p>Capacidad: Propone la creación de sistemas de información, para mejorar la gestión empresarial.</p>
+            </div>
+            <div class="weeks-grid">
+                <div class="week-card">
+                    <span class="week-badge u4-badge">Semana 13</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Ciclo de Vida del Desarrollo</summary>
+                        <p class="week-desc">Estudio comparativo profundo de las metodologías tradicionales de ciclo de vida (Cascada) frente a los paradigmas ágiles modernos (Scrum/DevOps). Se evalúa cuál enfoque metodológico maximiza el control de calidad, costos y plazos según la naturaleza del proyecto.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Avance Metodología</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u4-badge">Semana 14</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Implementación de Sistemas</summary>
+                        <p class="week-desc">Planificación de fases de implementación técnica: pruebas unitarias, integrales y de aceptación de usuario (UAT). Analizamos las estrategias críticas de conversión o migración de sistemas heredados hacia nuevas plataformas mediante despliegues directos o en paralelo.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Evidencia de Pruebas</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u4-badge">Semana 15</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Proyecto Práctico</summary>
+                        <p class="week-desc">Consolidación de las competencias gerenciales e ingenieriles mediante la auditoría, diseño e implementación piloto de una solución integral de Sistemas de Información en una unidad de negocio u organización de la región, validando el impacto estratégico de la propuesta.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">📂 Informe Final</a>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <span class="week-badge u4-badge">Semana 16</span>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Sustentación del Proyecto</summary>
+                        <p class="week-desc">Exposición magistral y defensa técnica de la solución desarrollada a lo largo del ciclo académico. Se sustenta el análisis de costos/beneficios, la viabilidad técnica de la infraestructura sugerida y el cumplimiento riguroso de los objetivos estratégicos de la gerencia.</p>
+                    </details>
+                    <div class="evidence-zone">
+                        <p class="evidence-title">Mis Entregables</p>
+                        <a href="#" class="btn-link">🎓 Presentación Final</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE EVALUACIÓN Y BIBLIOGRAFÍA -->
+        <section id="evaluacion" class="eval-section">
+            <h2 style="color: var(--secondary); border-bottom: 2px solid #8b5cf6; padding-bottom: 0.5rem;">Criterios de Evaluación y Enlaces de Interés</h2>
+            <p style="margin-top: 0.5rem; color: var(--text-light);">Estructura de ponderación oficial según el sílabo de la asignatura.</p>
+            
+            <div class="eval-grid">
+                <div class="eval-card">
+                    <h4>Conocimiento (10% - 25%)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Evaluaciones teóricas mediante cuestionarios y rúbricas por unidad.</p>
+                </div>
+                <div class="eval-card" style="border-left-color: #10b981;">
+                    <h4>Desempeño y Producto</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Habilidades prácticas, presentaciones orales e informes de proyectos reales.</p>
+                </div>
+                <div class="eval-card" style="border-left-color: #3b82f6;">
+                    <h4>Desempeño Final (30%)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Sustentación de la solución de Gerencia de Sistemas frente a la cátedra.</p>
+                </div>
+            </div>
+
+            <div class="eval-formula">
+                Fórmula Promedio Final: NF = (P1 + P2 + P3 + P4 + EDF) / 5
+            </div>
+
+            <h3 style="color: var(--secondary); margin-top: 2.5rem; margin-bottom: 1rem;">📚 Libros de Consulta (Enlaces Directos):</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 0.8rem; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <strong>Sistemas de Información Gerencial (15.ª ed.)</strong> - Laudon & Laudon <br>
+                    <a href="https://www.pearsoneducacion.net/colombia/Inicio/sistemas-gerencial-laudon-15ed-co-ebook" target="_blank" style="color: var(--primary-light); font-weight: 600; text-decoration: none; font-size: 0.9rem;">↗ Ver recurso en Pearson</a>
+                </li>
+                <li style="margin-bottom: 0.8rem; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <strong>Administración de los Sistemas de Información (5.ª ed.)</strong> - Effy Oz <br>
+                    <a href="https://gc.scalahed.com/recursos/files/r161r/w24796w/Administracion_SI.pdf" target="_blank" style="color: var(--primary-light); font-weight: 600; text-decoration: none; font-size: 0.9rem;">↗ Descargar PDF Académico</a>
+                </li>
+                <li style="margin-bottom: 0.8rem; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <strong>Sistemas de Información para la Dirección</strong> - Bernardi & Calvo <br>
+                    <a href="https://zaguan.unizar.es/record/88358/files/BOOK-2020-024.pdf" target="_blank" style="color: var(--primary-light); font-weight: 600; text-decoration: none; font-size: 0.9rem;">↗ Descargar del repositorio institucional</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Universidad Peruana Los Andes | Ingeniería de Sistemas y Computación</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">Diseño estructurado según las disposiciones del Dr. Magno Teófilo Baldeón Tovar</p>
+    </footer>
+
 </body>
 </html>
