@@ -6,297 +6,328 @@
     <title>Gerencia de Sistemas de Información - Portafolio Junior</title>
     <style>
         :root {
-            --bg-main: #1a426e; /* El azul de tu captura */
-            --bg-dark: #0f2a4a; /* Azul más oscuro para el menú/footer */
-            --accent-orange: #f39c12; /* Color naranja para la unidad activa */
-            --card-bg: #e1effa; /* Fondo celeste claro de las tarjetas */
+            --bg-main: #1a426e;
+            --bg-dark: #0f2a4a;
+            --accent-orange: #f39c12;
             --text-dark: #122a44;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background-color: var(--bg-main); color: white; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* MENÚ DE NAVEGACIÓN SUPERIOR */
-        nav { background-color: var(--bg-dark); padding: 1rem 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        /* NAV PRINCIPAL DE UNIDADES */
+        nav { background-color: var(--bg-dark); padding: 1rem 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-align: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
         .nav-container label { 
-            font-size: 0.85rem; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            color: #b0c4de; 
-            transition: color 0.3s ease;
-            letter-spacing: 0.05em;
+            font-size: 0.9rem; font-weight: bold; text-transform: uppercase; cursor: pointer; color: #b0c4de; 
+            padding: 0.5rem 1rem; transition: all 0.3s ease; letter-spacing: 0.05em;
         }
-        .nav-container label:hover { color: white; }
-
-        /* LÓGICA DE CONTROL DE PESTAÑAS OCULTAS */
-        .tab-input { display: none; }
-        #tab1:checked ~ nav .lbl-u1,
-        #tab2:checked ~ nav .lbl-u2,
-        #tab3:checked ~ nav .lbl-u3,
-        #tab4:checked ~ nav .lbl-u4 { color: var(--accent-orange); border-bottom: 2px solid var(--accent-orange); }
-
-        /* TÍTULO PRINCIPAL DINÁMICO */
-        .main-title-container { text-align: center; padding: 3rem 1rem 1rem 1rem; }
-        .subtitle-unit { 
-            color: var(--accent-orange); 
-            text-transform: uppercase; 
-            font-weight: bold; 
-            font-size: 1rem; 
-            letter-spacing: 0.2em; 
-            margin-bottom: 0.5rem;
-            display: none;
-        }
-        .main-title { font-size: 3rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); }
-
-        /* MOSTRAR EL SUBTÍTULO DE LA UNIDAD ACTIVA */
-        #tab1:checked ~ .main-title-container #sub-u1 { display: block; }
-        #tab2:checked ~ .main-title-container #sub-u2 { display: block; }
-        #tab3:checked ~ .main-title-container #sub-u3 { display: block; }
-        #tab4:checked ~ .main-title-container #sub-u4 { display: block; }
-
-        /* CONTENEDOR DE SECCIONES */
-        main { max-width: 1200px; margin: 2rem auto; width: 100%; padding: 0 2rem; flex: 1; }
-        .unit-section { display: none; animation: fadeIn 0.4s ease-in-out forwards; }
-
-        #tab1:checked ~ main #section-u1 { display: block; }
-        #tab2:checked ~ main #section-u2 { display: block; }
-        #tab3:checked ~ main #section-u3 { display: block; }
-        #tab4:checked ~ main #section-u4 { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* REJILLA DE TARJETAS (ESTILO CAPTURA) */
-        .weeks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; justify-content: center; }
         
-        .week-card { 
-            background-color: white; 
-            border-radius: 15px; 
-            padding: 1.5rem; 
-            text-align: center; 
-            color: var(--text-dark);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-        .week-card:hover { transform: translateY(-5px); }
+        /* OCULTAR INPUTS DE CONTROL */
+        .tab-input, .week-input { display: none; }
 
-        /* ÍCONOS CIRCULARES CON TEMÁTICA DE INGENIERÍA DE SISTEMAS */
-        .icon-circle {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 2px solid #3498db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            background-color: #f7f9fc;
-        }
+        /* ACTIVACIÓN VISUAL DE UNIDAD SELECCIONADA */
+        #u1-radio:checked ~ nav .lbl-u1,
+        #u2-radio:checked ~ nav .lbl-u2,
+        #u3-radio:checked ~ nav .lbl-u3,
+        #u4-radio:checked ~ nav .lbl-u4 { color: var(--accent-orange); border-bottom: 3px solid var(--accent-orange); }
 
-        /* TEXTOS INTERNOS DE LA TARJETA */
-        .week-label { font-size: 0.9rem; font-weight: bold; color: #2980b9; text-transform: uppercase; margin-top: auto; padding-top: 0.5rem; }
+        /* TÍTULOS */
+        .main-title-container { text-align: center; padding: 2.5rem 1rem 1rem 1rem; }
+        .main-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        main { max-width: 900px; margin: 1rem auto 3rem auto; width: 100%; padding: 0 1.5rem; flex: 1; }
         
-        /* DETALLES DESPLEGABLES INTEGRADOS */
-        details { width: 100%; margin-top: 0.5rem; }
-        summary { font-size: 1.05rem; font-weight: bold; color: var(--text-dark); cursor: pointer; outline: none; margin-bottom: 0.4rem; list-style: none; }
-        summary::-webkit-details-marker { display: none; }
-        .desc { font-size: 0.85rem; color: #555; text-align: justify; background: #f0f4f8; padding: 0.6rem; border-radius: 8px; margin-top: 0.4rem; border-left: 3px solid #3498db; }
+        /* SECCIONES DE UNIDAD (COMPLETAMENTE SEPARADAS) */
+        .unit-section { display: none; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        
+        /* MOSTRAR SOLO LA UNIDAD SELECCIONADA */
+        #u1-radio:checked ~ main #section-u1 { display: block; }
+        #u2-radio:checked ~ main #section-u2 { display: block; }
+        #u3-radio:checked ~ main #section-u3 { display: block; }
+        #u4-radio:checked ~ main #section-u4 { display: block; }
 
-        /* COMPLEMENTO DE INFORMACIÓN GENERAL */
-        .meta-footer { text-align: center; font-size: 0.8rem; color: #b0c4de; margin-top: 3rem; padding: 1rem; background: rgba(0,0,0,0.1); border-radius: 10px; }
+        /* BOTONES INTERNOS PARA SELECCIONAR SEMANA */
+        .week-selector { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 50px; }
+        .week-btn { 
+            background: transparent; border: 2px solid #b0c4de; color: #b0c4de; padding: 0.5rem 1.2rem; 
+            border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: all 0.2s ease;
+        }
+        .week-btn:hover { background: rgba(255,255,255,0.1); color: white; }
 
-        footer { background-color: var(--bg-dark); text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #7f8c8d; border-top: 1px solid rgba(255,255,255,0.05); }
+        /* ACTIVAR COLOR DEL BOTÓN DE LA SEMANA SELECCIONADA */
+        #w1:checked ~ #section-u1 .lbl-w1, #w2:checked ~ #section-u1 .lbl-w2, #w3:checked ~ #section-u1 .lbl-w3, #w4:checked ~ #section-u1 .lbl-w4,
+        #w5:checked ~ #section-u2 .lbl-w5, #w6:checked ~ #section-u2 .lbl-w6, #w7:checked ~ #section-u2 .lbl-w7, #w8:checked ~ #section-u2 .lbl-w8,
+        #w9:checked ~ #section-u3 .lbl-w9, #w10:checked ~ #section-u3 .lbl-w10, #w11:checked ~ #section-u3 .lbl-w11, #w12:checked ~ #section-u3 .lbl-w12,
+        #w13:checked ~ #section-u4 .lbl-w13, #w14:checked ~ #section-u4 .lbl-w14, #w15:checked ~ #section-u4 .lbl-w15, #w16:checked ~ #section-u4 .lbl-w16 {
+            background: var(--accent-orange); border-color: var(--accent-orange); color: white; transform: scale(1.05);
+        }
+
+        /* MOSTRAR ÚNICAMENTE LA TARJETA DE LA SEMANA CLICKEADA */
+        .week-content-card { display: none; background: white; color: var(--text-dark); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); animation: fadeInUp 0.3s ease-in-out forwards; }
+        
+        #w1:checked ~ #section-u1 #card-w1, #w2:checked ~ #section-u1 #card-w2, #w3:checked ~ #section-u1 #card-w3, #w4:checked ~ #section-u1 #card-w4,
+        #w5:checked ~ #section-u2 #card-w5, #w6:checked ~ #section-u2 #card-w6, #w7:checked ~ #section-u2 #card-w7, #w8:checked ~ #section-u2 #card-w8,
+        #w9:checked ~ #section-u3 #card-w9, #w10:checked ~ #section-u3 #card-w10, #w11:checked ~ #section-u3 #card-w11, #w12:checked ~ #section-u3 #card-w12,
+        #w13:checked ~ #section-u4 #card-w13, #w14:checked ~ #section-u4 #card-w14, #w15:checked ~ #section-u4 #card-w15, #w16:checked ~ #section-u4 #card-w16 {
+            display: block;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ESTILO INTERNO DE LA TARJETA DE CADA SEMANA */
+        .card-header { display: flex; align-items: center; gap: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .card-icon { font-size: 2.5rem; background: #e1effa; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .card-title h3 { font-size: 1.4rem; color: var(--bg-dark); }
+        .card-title span { font-size: 0.8rem; font-weight: bold; color: #3498db; text-transform: uppercase; }
+        
+        .card-body { font-size: 0.95rem; line-height: 1.6; color: #4a5568; text-align: justify; margin-bottom: 1.5rem; }
+        .card-footer { border-top: 1px dashed #e2e8f0; padding-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .btn-task { background: #3498db; color: white; padding: 0.5rem 1rem; text-decoration: none; font-size: 0.85rem; font-weight: bold; border-radius: 6px; transition: background 0.2s; }
+        .btn-task:hover { background: #2980b9; }
+
+        /* MENSAJE DE BIENVENIDA O ESPERA */
+        .placeholder-text { text-align: center; color: #b0c4de; font-style: italic; padding: 2rem 0; }
+
+        footer { background-color: var(--bg-dark); text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #7f8c8d; margin-top: auto; }
     </style>
 </head>
 <body>
 
-    <input type="radio" name="units" id="tab1" class="tab-input" checked>
-    <input type="radio" name="units" id="tab2" class="tab-input">
-    <input type="radio" name="units" id="tab3" class="tab-input">
-    <input type="radio" name="units" id="tab4" class="tab-input">
+    <!-- DISPOSITIVOS DE CONTROL DE UNIDADES -->
+    <input type="radio" name="units" id="u1-radio" class="tab-input" checked>
+    <input type="radio" name="units" id="u2-radio" class="tab-input">
+    <input type="radio" name="units" id="u3-radio" class="tab-input">
+    <input type="radio" name="units" id="u4-radio" class="tab-input">
 
+    <!-- DISPOSITIVOS DE CONTROL DE SEMANAS (SISTEMA INTEGRADO) -->
+    <!-- U1 -->
+    <input type="radio" name="weeks" id="w1" class="week-input" checked>
+    <input type="radio" name="weeks" id="w2" class="week-input">
+    <input type="radio" name="weeks" id="w3" class="week-input">
+    <input type="radio" name="weeks" id="w4" class="week-input">
+    <!-- U2 -->
+    <input type="radio" name="weeks" id="w5" class="week-input">
+    <input type="radio" name="weeks" id="w6" class="week-input">
+    <input type="radio" name="weeks" id="w7" class="week-input">
+    <input type="radio" name="weeks" id="w8" class="week-input">
+    <!-- U3 -->
+    <input type="radio" name="weeks" id="w9" class="week-input">
+    <input type="radio" name="weeks" id="w10" class="week-input">
+    <input type="radio" name="weeks" id="w11" class="week-input">
+    <input type="radio" name="weeks" id="w12" class="week-input">
+    <!-- U4 -->
+    <input type="radio" name="weeks" id="w13" class="week-input">
+    <input type="radio" name="weeks" id="w14" class="week-input">
+    <input type="radio" name="weeks" id="w15" class="week-input">
+    <input type="radio" name="weeks" id="w16" class="week-input">
+
+    <!-- MENU SUPERIOR -->
     <nav>
         <div class="nav-container">
-            <label for="tab1">Inicio</label>
-            <label for="tab1" class="lbl-u1">Unidad I</label>
-            <label for="tab2" class="lbl-u2">Unidad II</label>
-            <label for="tab3" class="lbl-u3">Unidad III</label>
-            <label for="tab4" class="lbl-u4">Unidad IV</label>
+            <label for="u1-radio" class="lbl-u1">Unidad I</label>
+            <label for="u2-radio" class="lbl-u2">Unidad II</label>
+            <label for="u3-radio" class="lbl-u3">Unidad III</label>
+            <label for="u4-radio" class="lbl-u4">Unidad IV</label>
         </div>
     </nav>
 
     <div class="main-title-container">
-        <span class="subtitle-unit" id="sub-u1">Unidad I</span>
-        <span class="subtitle-unit" id="sub-u2">Unidad II</span>
-        <span class="subtitle-unit" id="sub-u3">Unidad III</span>
-        <span class="subtitle-unit" id="sub-u4">Unidad IV</span>
         <h1 class="main-title">Semanas de Clase</h1>
     </div>
 
     <main>
         
+        <!-- SECCIÓN UNIDAD I -->
         <section id="section-u1" class="unit-section">
-            <div class="weeks-grid">
-                <div class="week-card">
-                    <div class="icon-circle">📊</div>
-                    <details>
-                        <summary>La Información en la Empresa</summary>
-                        <p class="desc">Estudio de los sistemas de información, sus componentes esenciales y tipos aplicados en las organizaciones empresariales.</p>
-                    </details>
-                    <span class="week-label">Semana 01</span>
+            <!-- Selector de Semanas interno -->
+            <div class="week-selector">
+                <label for="w1" class="week-btn lbl-w1">Semana 01</label>
+                <label for="w2" class="week-btn lbl-w2">Semana 02</label>
+                <label for="w3" class="week-btn lbl-w3">Semana 03</label>
+                <label for="w4" class="week-btn lbl-w4">Semana 04</label>
+            </div>
+
+            <!-- Contenidos que solo aparecen al picarle a su botón -->
+            <div id="card-w1" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title"><span>Semana 01</span><h3>La Información en la Empresa</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">☁️</div>
-                    <details>
-                        <summary>Computación en la Nube</summary>
-                        <p class="desc">Modelos de despliegue cloud indispensables para soportar infraestructuras modernas de TI organizacionales.</p>
-                    </details>
-                    <span class="week-label">Semana 02</span>
+                <p class="card-body">Estudio completo de la información como activo estratégico del negocio, identificando sus componentes esenciales y los diferentes tipos de sistemas aplicados directamente en las organizaciones empresariales modernas.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Ver Tarea 1</a></div>
+            </div>
+
+            <div id="card-w2" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">☁️</div>
+                    <div class="card-title"><span>Semana 02</span><h3>Computación en la Nube</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">⚙️</div>
-                    <details>
-                        <summary>Administración en la Nube</summary>
-                        <p class="desc">Análisis exhaustivo de las funciones clave y tecnologías necesarias en la administración moderna sobre entornos en la nube.</p>
-                    </details>
-                    <span class="week-label">Semana 03</span>
+                <p class="card-body">Análisis detallado de los modelos de despliegue en la nube (pública, privada e híbrida), fundamentales para soportar arquitecturas de TI flexibles, escalables y orientadas a la optimización de costes.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Ver Tarea 2</a></div>
+            </div>
+
+            <div id="card-w3" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-title"><span>Semana 03</span><h3>Administración en la Nube</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🖥️</div>
-                    <details>
-                        <summary>Infraestructura de TI</summary>
-                        <p class="desc">Identificación de los componentes y tipologías de la infraestructura tecnológica requeridos a nivel de hardware y redes corporativas.</p>
-                    </details>
-                    <span class="week-label">Semana 04</span>
+                <p class="card-body">Examen exhaustivo de las herramientas, funciones clave y tecnologías necesarias para realizar una correcta administración y monitoreo sobre entornos de infraestructura en la nube corporativa.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Ver Tarea 3</a></div>
+            </div>
+
+            <div id="card-w4" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🖥️</div>
+                    <div class="card-title"><span>Semana 04</span><h3>Infraestructura de TI</h3></div>
                 </div>
+                <p class="card-body">Identificación de los componentes físicos y lógicos de la infraestructura tecnológica, evaluando la evolución del hardware y las redes necesarias para la continuidad operativa del negocio.</p>
+                <div class="card-footer"><span>Evaluación</span><a href="#" class="btn-task">📝 Examen I</a></div>
             </div>
         </section>
 
+        <!-- SECCIÓN UNIDAD II -->
         <section id="section-u2" class="unit-section">
-            <div class="weeks-grid">
-                <div class="week-card">
-                    <div class="icon-circle">📈</div>
-                    <details>
-                        <summary>SI en los Negocios</summary>
-                        <p class="desc">Fundamentos de inteligencia de negocios, bases de datos y la correcta administración de la información empresarial.</p>
-                    </details>
-                    <span class="week-label">Semana 05</span>
+            <div class="week-selector">
+                <label for="w5" class="week-btn lbl-w5">Semana 05</label>
+                <label for="w6" class="week-btn lbl-w6">Semana 06</label>
+                <label for="w7" class="week-btn lbl-w7">Semana 07</label>
+                <label for="w8" class="week-btn lbl-w8">Semana 08</label>
+            </div>
+
+            <div id="card-w5" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title"><span>Semana 05</span><h3>SI en los Negocios</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">📐</div>
-                    <details>
-                        <summary>Estructura Integral EPS</summary>
-                        <p class="desc">Diseño arquitectónico de los Sistemas de Información Gerencial basado en la teoría de los Tres Planos: Estructura, Proceso y Sistema.</p>
-                    </details>
-                    <span class="week-label">Semana 06</span>
+                <p class="card-body">Conceptos avanzados de Business Intelligence (BI), modelado de bases de datos y la administración inteligente de flujos de datos estructurados para la alta gerencia.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Ver Evidencia</a></div>
+            </div>
+
+            <div id="card-w6" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">📐</div>
+                    <div class="card-title"><span>Semana 06</span><h3>Estructura Integral EPS</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🏢</div>
-                    <details>
-                        <summary>Aplicaciones y EAS</summary>
-                        <p class="desc">Análisis y usos de software corporativo integrado de gran escala empresarial como ERP, CRM, SCM y SIG.</p>
-                    </details>
-                    <span class="week-label">Semana 07</span>
+                <p class="card-body">Diseño arquitectónico de los Sistemas de Información Gerencial basado en los Tres Planos organizacionales: Estructura, Proceso y Sistema para el correcto mapeo de la empresa.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Diagrama EPS</a></div>
+            </div>
+
+            <div id="card-w7" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🏢</div>
+                    <div class="card-title"><span>Semana 07</span><h3>Aplicaciones y EAS</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🌐</div>
-                    <details>
-                        <summary>Gestión en Nube Híbrida</summary>
-                        <p class="desc">Administración y control de software de nube híbrida diseñado para impulsar negocios inteligentes.</p>
-                    </details>
-                    <span class="week-label">Semana 08</span>
+                <p class="card-body">Análisis comparativo de sistemas integrados a gran escala corporativa: implementación de arquitecturas de software ERP, CRM y SCM eliminando silos de información.</p>
+                <div class="card-footer"><span>Entregable Académico</span><a href="#" class="btn-task">📂 Caso de Estudio</a></div>
+            </div>
+
+            <div id="card-w8" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title"><span>Semana 08</span><h3>Gestión en Nube Híbrida</h3></div>
                 </div>
+                <p class="card-body">Estrategias operativas para la migración e interoperabilidad de software bajo entornos corporativos de nube híbrida acelerando los negocios inteligentes.</p>
+                <div class="card-footer"><span>Evaluación</span><a href="#" class="btn-task">📝 Examen II</a></div>
             </div>
         </section>
 
+        <!-- SECCIÓN UNIDAD III -->
         <section id="section-u3" class="unit-section">
-            <div class="weeks-grid">
-                <div class="week-card">
-                    <div class="icon-circle">⚖️</div>
-                    <details>
-                        <summary>Gobierno de TI</summary>
-                        <p class="desc">Alineamiento estratégico de las tecnologías con los objetivos de la empresa para la generación de valor y gestión de procesos.</p>
-                    </details>
-                    <span class="week-label">Semana 09</span>
+            <div class="week-selector">
+                <label for="w9" class="week-btn lbl-w9">Semana 09</label>
+                <label for="w10" class="week-btn lbl-w10">Semana 10</label>
+                <label for="w11" class="week-btn lbl-w11">Semana 11</label>
+                <label for="w12" class="week-btn lbl-w12">Semana 12</label>
+            </div>
+
+            <div id="card-w9" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">⚖️</div>
+                    <div class="card-title"><span>Semana 09</span><h3>Gobierno de TI</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🛠️</div>
-                    <details>
-                        <summary>Gestión de Servicios</summary>
-                        <p class="desc">Definición e implementación práctica del ciclo de Estrategia del Servicio informático de acuerdo a estándares.</p>
-                    </details>
-                    <span class="week-label">Semana 10</span>
+                <p class="card-body">Marcos normativos y de buenas prácticas de Gobierno de TI para mitigar riesgos, alinear la tecnología a la visión de la empresa y asegurar valor medible.</p>
+                <div class="card-footer"><span>Entregable</span><a href="#" class="btn-task">📂 Ver Archivos</a></div>
+            </div>
+
+            <div id="card-w10" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🛠️</div>
+                    <div class="card-title"><span>Semana 10</span><h3>Gestión de Servicios</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🔄</div>
-                    <details>
-                        <summary>Diseño y Transición</summary>
-                        <p class="desc">Planificación del Diseño del servicio técnico y aseguramiento de una correcto flujo de Transición del servicio.</p>
-                    </details>
-                    <span class="week-label">Semana 11</span>
+                <p class="card-body">Diseño y estructuración del catálogo de servicios informáticos en base al ciclo de vida e implementación del marco de trabajo de ITIL.</p>
+                <div class="card-footer"><span>Entregable</span><a href="#" class="btn-task">📂 Marco de Trabajo</a></div>
+            </div>
+
+            <div id="card-w11" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🔄</div>
+                    <div class="card-title"><span>Semana 11</span><h3>Diseño y Transición</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🛎️</div>
-                    <details>
-                        <summary>Gestión del Cambio</summary>
-                        <p class="desc">Gobernanza del conocimiento técnico, administración de eventos, incidencias, problemas y mesa de servicio (Centro de Servicio).</p>
-                    </details>
-                    <span class="week-label">Semana 12</span>
+                <p class="card-body">Planificación de la fase de arquitectura de soluciones y los mecanismos seguros para garantizar una transición exitosa hacia nuevos entornos operativos.</p>
+                <div class="card-footer"><span>Entregable</span><a href="#" class="btn-task">📂 Evidencias</a></div>
+            </div>
+
+            <div id="card-w12" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🛎️</div>
+                    <div class="card-title"><span>Semana 12</span><h3>Gestión del Cambio</h3></div>
                 </div>
+                <p class="card-body">Flujos operativos para el Service Desk: Control de incidencias, problemas, eventos inesperados y bases de conocimiento técnico corporativo.</p>
+                <div class="card-footer"><span>Evaluación</span><a href="#" class="btn-task">📝 Examen III</a></div>
             </div>
         </section>
 
+        <!-- SECCIÓN UNIDAD IV -->
         <section id="section-u4" class="unit-section">
-            <div class="weeks-grid">
-                <div class="week-card">
-                    <div class="icon-circle">🔄</div>
-                    <details>
-                        <summary>Ciclo de Vida de SI</summary>
-                        <p class="desc">Análisis detallado de metodologías para el modelado y correcto Desarrollo de Sistemas de Información.</p>
-                    </details>
-                    <span class="week-label">Semana 13</span>
+            <div class="week-selector">
+                <label for="w13" class="week-btn lbl-w13">Semana 13</label>
+                <label for="w14" class="week-btn lbl-w14">Semana 14</label>
+                <label for="w15" class="week-btn lbl-w15">Semana 15</label>
+                <label for="w16" class="week-btn lbl-w16">Semana 16</label>
+            </div>
+
+            <div id="card-w13" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🔄</div>
+                    <div class="card-title"><span>Semana 13</span><h3>Ciclo de Vida de SI</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🚀</div>
-                    <details>
-                        <summary>Implementación de SI</summary>
-                        <p class="desc">Fases críticas del despliegue, pruebas técnicas y puesta en producción de sistemas de información empresarial.</p>
-                    </details>
-                    <span class="week-label">Semana 14</span>
+                <p class="card-body">Metodologías tradicionales frente a ágiles (Scrum, DevOps) aplicadas al ciclo completo de análisis, diseño e ingeniería de software corporativo.</p>
+                <div class="card-footer"><span>Proyecto</span><a href="#" class="btn-task">📂 Metodología</a></div>
+            </div>
+
+            <div id="card-w14" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-title"><span>Semana 14</span><h3>Implementación de SI</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">📝</div>
-                    <details>
-                        <summary>Elaboración de Proyecto</summary>
-                        <p class="desc">Construcción práctica y desarrollo real de un proyecto integral enfocado a resolver necesidades en una empresa de la región.</p>
-                    </details>
-                    <span class="week-label">Semana 15</span>
+                <p class="card-body">Pruebas integrales de sistemas informáticos, flujos de control de calidad UAT, y estrategias técnicas seguras de puesta en producción final.</p>
+                <div class="card-footer"><span>Proyecto</span><a href="#" class="btn-task">📂 Plan de Pruebas</a></div>
+            </div>
+
+            <div id="card-w15" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title"><span>Semana 15</span><h3>Elaboración de Proyecto</h3></div>
                 </div>
-                <div class="week-card">
-                    <div class="icon-circle">🎓</div>
-                    <details>
-                        <summary>Exposición del Proyecto</summary>
-                        <p class="desc">Sustentación técnica final y defensa del software de gestión desarrollado ante la mesa examinadora.</p>
-                    </details>
-                    <span class="week-label">Semana 16</span>
+                <p class="card-body">Documentación final y desarrollo práctico de la solución gerencial e informática construida para resolver fallas en una empresa regional.</p>
+                <div class="card-footer"><span>Proyecto</span><a href="#" class="btn-task">📂 Informe Final</a></div>
+            </div>
+
+            <div id="card-w16" class="week-content-card">
+                <div class="card-header">
+                    <div class="card-icon">🎓</div>
+                    <div class="card-title"><span>Semana 16</span><h3>Exposición del Proyecto</h3></div>
                 </div>
+                <p class="card-body">Defensa técnica final del software gerencial estructurado, sustentando costos, beneficios, arquitectura de servidores y retorno estratégico.</p>
+                <div class="card-footer"><span>Sustentación</span><a href="#" class="btn-task">🎓 Diapositivas</a></div>
             </div>
         </section>
-
-        <div class="meta-footer">
-            <p><strong>Curso:</strong> Gerencia de Sistemas de Información (Código: 332159) [cite: 4, 6] &bull; <strong>Ciclo:</strong> VII Ciclo (2026-I) [cite: 10]</p>
-            <p><strong>Docente:</strong> Dr. Magno Teófilo Baldeón Tovar  &bull; <strong>Facultad:</strong> Ingeniería de Sistemas y Computación (UPLA) [cite: 1, 3]</p>
-        </div>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 Universidad Peruana Los Andes  | Portafolio Digital de Ingeniería</p>
+        <p>&copy; 2026 Universidad Peruana Los Andes[cite: 1] | Docente: Dr. Magno Baldeón | Portafolio Junior</p>
     </footer>
 
 </body>
