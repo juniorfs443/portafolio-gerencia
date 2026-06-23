@@ -76,7 +76,7 @@
 
         .weeks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .week-card { background-color: var(--card-bg); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 1.8rem; display: flex; flex-direction: column; transition: transform 0.3s; }
-        .week-card:hover { transform: translateY(-5px); }
+        .week-card:hover { transform: translateY(-3px); }
         
         .week-badge { align-self: flex-start; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: white; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
         .u1-badge { background-color: var(--u1-color); }
@@ -84,9 +84,42 @@
         .u3-badge { background-color: var(--u3-color); }
         .u4-badge { background-color: var(--u4-color); }
         
-        .week-title { font-size: 1.25rem; color: var(--secondary); margin-bottom: 0.75rem; font-weight: 700; }
-        .week-desc { font-size: 0.95rem; color: var(--text); margin-bottom: 1.5rem; text-align: justify; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border-left: 3px solid #cbd5e1; }
+        /* Estilos Interactivos de Despliegue */
+        details { width: 100%; }
+        summary { 
+            font-size: 1.25rem; 
+            color: var(--secondary); 
+            margin-bottom: 0.5rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            list-style: none;
+            position: relative;
+            padding-right: 25px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '▼';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            transition: transform 0.2s;
+        }
+        details[open] summary::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
         
+        .click-hint { font-size: 0.8rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.75rem; display: block; }
+
+        .week-desc { font-size: 0.95rem; color: var(--text); margin-top: 0.75rem; margin-bottom: 1rem; text-align: justify; background: #f8fafc; padding: 0.75rem; border-radius: 8px; border-left: 3px solid var(--primary-light); animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .evidence-zone { margin-top: auto; padding-top: 1rem; border-top: 1px dashed #e2e8f0; }
         .evidence-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.5rem; }
         .btn-link { display: inline-flex; padding: 0.4rem 0.8rem; background-color: #f8fafc; border: 1px solid #cbd5e1; color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 600; border-radius: 6px; transition: all 0.2s; }
@@ -139,8 +172,11 @@
             <div class="weeks-grid">
                 <div class="week-card">
                     <span class="week-badge u1-badge">Semana 01</span>
-                    <h3 class="week-title">La Información en la Empresa</h3>
-                    <p class="week-desc">Se analiza el rol de la información como activo estratégico indispensable. Estudiamos cómo los Sistemas de Información (SI) transforman los datos operativos en ventajas competitivas y cómo sus componentes interactúan para soportar la toma de decisiones gerenciales en la organización contemporánea.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>La Información en la Empresa</summary>
+                        <p class="week-desc">Se analiza el rol de la información como activo estratégico indispensable. Estudiamos cómo los Sistemas de Información (SI) transforman los datos operativos en ventajas competitivas y cómo sus componentes interactúan para soportar la toma de decisiones gerenciales en la organización contemporánea.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Tarea Sem 1</a>
@@ -148,8 +184,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u1-badge">Semana 02</span>
-                    <h3 class="week-title">Computación en la Nube</h3>
-                    <p class="week-desc">Evaluación de los modelos de despliegue informático (Pública, Privada, Híbrida y Comunitaria). Se fundamenta cómo la migración hacia la nube reduce drásticamente los costos de capital (CapEx) a favor de costos operativos (OpEx), dotando a las organizaciones de elasticidad y alta disponibilidad.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Computación en la Nube</summary>
+                        <p class="week-desc">Evaluación de los modelos de despliegue informático (Pública, Privada, Híbrida y Comunitaria). Se fundamenta cómo la migración hacia la nube reduce drásticamente los costos de capital (CapEx) a favor de costos operativos (OpEx), dotando a las organizaciones de elasticidad y alta disponibilidad.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Tarea Sem 2</a>
@@ -157,8 +196,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u1-badge">Semana 03</span>
-                    <h3 class="week-title">Administración en la Nube</h3>
-                    <p class="week-desc">Revisión de las funciones gerenciales aplicadas al aprovisionamiento y monitoreo de servicios Cloud. Se profundiza en el control de acuerdos de niveles de servicio (SLA), la gobernanza de accesos y el aprovisionamiento automatizado mediante arquitecturas SaaS, PaaS e IaaS.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Administración en la Nube</summary>
+                        <p class="week-desc">Revisión de las funciones gerenciales aplicadas al aprovisionamiento y monitoreo de servicios Cloud. Se profundiza en el control de acuerdos de niveles de servicio (SLA), la gobernanza de accesos y el aprovisionamiento automatizado mediante arquitecturas SaaS, PaaS e IaaS.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Tarea Sem 3</a>
@@ -166,8 +208,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u1-badge">Semana 04</span>
-                    <h3 class="week-title">Infraestructura de TI</h3>
-                    <p class="week-desc">Análisis de la evolución técnica de las plataformas de hardware, software, redes y almacenamiento empresarial. Se evalúan las tecnologías emergentes como la virtualización, la contenedorización y su impacto directo en la escalabilidad y flexibilidad del modelo de negocio.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Infraestructura de TI</summary>
+                        <p class="week-desc">Análisis de la evolución técnica de las plataformas de hardware, software, redes y almacenamiento empresarial. Se evalúan las tecnologías emergentes como la virtualización, la contenedorización y su impacto directo en la escalabilidad y flexibilidad del modelo de negocio.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📝 Examen Parcial I</a>
@@ -185,8 +230,11 @@
             <div class="weeks-grid">
                 <div class="week-card">
                     <span class="week-badge u2-badge">Semana 05</span>
-                    <h3 class="week-title">SI en los Negocios</h3>
-                    <p class="week-desc">Modelado de bases de datos relacionales y almacenes de datos (Data Warehouses) orientados a la Inteligencia de Negocios (BI). Estudiamos la transición crítica de los datos crudos hacia patrones analíticos que optimizan las proyecciones y planes tácticos corporativos.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>SI en los Negocios</summary>
+                        <p class="week-desc">Modelado de bases de datos relacionales y almacenes de datos (Data Warehouses) orientados a la Inteligencia de Negocios (BI). Estudiamos la transición crítica de los datos crudos hacia patrones analíticos que optimizan las proyecciones y planes tácticos corporativos.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Evidencia</a>
@@ -194,8 +242,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u2-badge">Semana 06</span>
-                    <h3 class="week-title">Estructura Informática Integral</h3>
-                    <p class="week-desc">Diseño arquitectónico de los Sistemas de Información Gerencial basado en la teoría de los Tres Planos (Estructura, Proceso y Sistema - EPS). Permite mapear flujos organizacionales y estructurar las soluciones de software alineadas estrictamente al mapa de procesos de la empresa.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Estructura Informática Integral</summary>
+                        <p class="week-desc">Diseño arquitectónico de los Sistemas de Información Gerencial basado en la teoría de los Tres Planos (Estructura, Proceso y Sistema - EPS). Permite mapear flujos organizacionales y estructurar las soluciones de software alineadas estrictamente al mapa de procesos de la empresa.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Esquema EPS</a>
@@ -203,8 +254,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u2-badge">Semana 07</span>
-                    <h3 class="week-title">Aplicaciones Empresariales y EAS</h3>
-                    <p class="week-desc">Evaluación e integración vertical de plataformas críticas: Enterprise Resource Planning (ERP), Customer Relationship Management (CRM) y Supply Chain Management (SCM). Se discute cómo estas arquitecturas centralizadas erradican los silos de información.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Aplicaciones Empresariales y EAS</summary>
+                        <p class="week-desc">Evaluación e integración vertical de plataformas críticas: Enterprise Resource Planning (ERP), Customer Relationship Management (CRM) y Supply Chain Management (SCM). Se discute cómo estas arquitecturas centralizadas erradican los silos de información.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Análisis de Software</a>
@@ -212,8 +266,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u2-badge">Semana 08</span>
-                    <h3 class="week-title">Gestión para Nube Híbrida</h3>
-                    <p class="week-desc">Estudio de estrategias de migración e interoperabilidad de software corporativo bajo topologías híbridas. Se analiza la distribución inteligente de cargas de trabajo confidenciales en la nube privada y el procesamiento masivo escalable en la nube pública.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión para Nube Híbrida</summary>
+                        <p class="week-desc">Estudio de estrategias de migración e interoperabilidad de software corporativo bajo topologías híbridas. Se analiza la distribución inteligente de cargas de trabajo confidenciales en la nube privada y el procesamiento masivo escalable en la nube pública.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📝 Examen Parcial II</a>
@@ -231,8 +288,11 @@
             <div class="weeks-grid">
                 <div class="week-card">
                     <span class="week-badge u3-badge">Semana 09</span>
-                    <h3 class="week-title">Gobierno de TI</h3>
-                    <p class="week-desc">Aplicación de marcos normativos de Gobierno de TI (como COBIT e ITIL) para asegurar el alineamiento estratégico de la tecnología con los objetivos corporativos, mitigando riesgos operativos y maximizando el retorno de inversión en tecnologías informáticas.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gobierno de TI</summary>
+                        <p class="week-desc">Aplicación de marcos normativos de Gobierno de TI (como COBIT e ITIL) para asegurar el alineamiento estratégico de la tecnología con los objetivos corporativos, mitigando riesgos operativos y maximizando el retorno de inversión en tecnologías informáticas.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Evidencia</a>
@@ -240,8 +300,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u3-badge">Semana 10</span>
-                    <h3 class="week-title">Gestión de Servicios</h3>
-                    <p class="week-desc">Modelado de la Estrategia del Servicio en base al ciclo de vida de ITIL. Se definen las capacidades y recursos técnicos requeridos para estructurar catálogos de servicios de TI de alto valor, orientados a satisfacer la demanda interna y externa de la organización.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión de Servicios</summary>
+                        <p class="week-desc">Modelado de la Estrategia del Servicio en base al ciclo de vida de ITIL. Se definen las capacidades y recursos técnicos requeridos para estructurar catálogos de servicios de TI de alto valor, orientados a satisfacer la demanda interna y externa de la organización.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Evidencia</a>
@@ -249,8 +312,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u3-badge">Semana 11</span>
-                    <h3 class="week-title">Diseño y Transición</h3>
-                    <p class="week-desc">Análisis de la etapa de Diseño y Transición del Servicio. Se formulan las arquitecturas de red, plataformas de datos y métricas (KPIs), junto con la planificación metodológica para asegurar que el despliegue del software no interrumpa las operaciones actuales.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Diseño y Transición</summary>
+                        <p class="week-desc">Análisis de la etapa de Diseño y Transición del Servicio. Se formulan las arquitecturas de red, plataformas de datos y métricas (KPIs), junto con la planificación metodológica para asegurar que el despliegue del software no interrumpa las operaciones actuales.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Subir Evidencia</a>
@@ -258,8 +324,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u3-badge">Semana 12</span>
-                    <h3 class="week-title">Gestión del Cambio</h3>
-                    <p class="week-desc">Implementación del flujo de Mesa de Servicios (Service Desk). Abordamos metodologías para el control y registro de incidentes, problemas y requerimientos, enfocándonos en la gestión del conocimiento técnico para reducir tiempos de parada operativa en fallos informáticos.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Gestión del Cambio</summary>
+                        <p class="week-desc">Implementación del flujo de Mesa de Servicios (Service Desk). Abordamos metodologías para el control y registro de incidentes, problemas y requerimientos, enfocándonos en la gestión del conocimiento técnico para reducir tiempos de parada operativa en fallos informáticos.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📝 Examen Parcial III</a>
@@ -277,8 +346,11 @@
             <div class="weeks-grid">
                 <div class="week-card">
                     <span class="week-badge u4-badge">Semana 13</span>
-                    <h3 class="week-title">Ciclo de Vida del Desarrollo</h3>
-                    <p class="week-desc">Estudio comparativo profundo de las metodologías tradicionales de ciclo de vida (Cascada) frente a los paradigmas ágiles modernos (Scrum/DevOps). Se evalúa cuál enfoque metodológico maximiza el control de calidad, costos y plazos según la naturaleza del proyecto.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Ciclo de Vida del Desarrollo</summary>
+                        <p class="week-desc">Estudio comparativo profundo de las metodologías tradicionales de ciclo de vida (Cascada) frente a los paradigmas ágiles modernos (Scrum/DevOps). Se evalúa cuál enfoque metodológico maximiza el control de calidad, costos y plazos según la naturaleza del proyecto.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Avance Metodología</a>
@@ -286,8 +358,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u4-badge">Semana 14</span>
-                    <h3 class="week-title">Implementación de Sistemas</h3>
-                    <p class="week-desc">Planificación de fases de implementación técnica: pruebas unitarias, integrales y de aceptación de usuario (UAT). Analizamos las estrategias críticas de conversión o migración de sistemas heredados hacia nuevas plataformas mediante despliegues directos o en paralelo.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Implementación de Sistemas</summary>
+                        <p class="week-desc">Planificación de fases de implementación técnica: pruebas unitarias, integrales y de aceptación de usuario (UAT). Analizamos las estrategias críticas de conversión o migración de sistemas heredados hacia nuevas plataformas mediante despliegues directos o en paralelo.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Evidencia de Pruebas</a>
@@ -295,8 +370,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u4-badge">Semana 15</span>
-                    <h3 class="week-title">Proyecto Práctico</h3>
-                    <p class="week-desc">Consolidación de las competencias gerenciales e ingenieriles mediante la auditoría, diseño e implementación piloto de una solución integral de Sistemas de Información en una unidad de negocio u organización de la región, validando el impacto estratégico de la propuesta.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Proyecto Práctico</summary>
+                        <p class="week-desc">Consolidación de las competencias gerenciales e ingenieriles mediante la auditoría, diseño e implementación piloto de una solución integral de Sistemas de Información en una unidad de negocio u organización de la región, validando el impacto estratégico de la propuesta.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">📂 Informe Final</a>
@@ -304,8 +382,11 @@
                 </div>
                 <div class="week-card">
                     <span class="week-badge u4-badge">Semana 16</span>
-                    <h3 class="week-title">Sustentación del Proyecto</h3>
-                    <p class="week-desc">Exposición magistral y defensa técnica de la solución desarrollada a lo largo del ciclo académico. Se sustenta el análisis de costos/beneficios, la viabilidad técnica de la infraestructura sugerida y el cumplimiento riguroso de los objetivos estratégicos de la gerencia.</p>
+                    <span class="click-hint">🖱️ Clic para ver tema</span>
+                    <details>
+                        <summary>Sustentación del Proyecto</summary>
+                        <p class="week-desc">Exposición magistral y defensa técnica de la solución desarrollada a lo largo del ciclo académico. Se sustenta el análisis de costos/beneficios, la viabilidad técnica de la infraestructura sugerida y el cumplimiento riguroso de los objetivos estratégicos de la gerencia.</p>
+                    </details>
                     <div class="evidence-zone">
                         <p class="evidence-title">Mis Entregables</p>
                         <a href="#" class="btn-link">🎓 Presentación Final</a>
@@ -322,7 +403,7 @@
             <div class="eval-grid">
                 <div class="eval-card">
                     <h4>Conocimiento (10% - 25%)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-light);">Evaluaciones teóricas mediante cuestionarios y rúblicas por unidad.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Evaluaciones teóricas mediante cuestionarios y rúbricas por unidad.</p>
                 </div>
                 <div class="eval-card" style="border-left-color: #10b981;">
                     <h4>Desempeño y Producto</h4>
